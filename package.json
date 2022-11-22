@@ -1,0 +1,29 @@
+{
+  "name": "@hqdaemon/multipart-parser",
+  "version": "1.0.0",
+  "description": "Node.js Multipart Data Processing",
+  "main": "src/mp.mjs",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node tests/test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hqdaemon/multipart-parser.git"
+  },
+  "keywords": [
+    "multipart",
+    "parser"
+  ],
+  "author": {
+    "name": "Alexander Yermolenko",
+    "url": "https://surfy.one"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hqdaemon/multipart-parser/issues"
+  },
+  "homepage": "https://github.com/hqdaemon/multipart-parser#readme"
+}
