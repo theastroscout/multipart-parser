@@ -18,7 +18,7 @@ const multipart = buf => {
 	const _N = Buffer.from("\n");
 	
 	let lineBreakIndex = buf.indexOf(Buffer.from("\n"));
-	const lineBreak = buf[lineBreakIndex-1] === _R ? Buffer.concat([_R,_N], 2) : _N;
+	const lineBreak = buf.slice(lineBreakIndex-1, lineBreakIndex).equals(_R) ? Buffer.concat([_R,_N], 2) : _N;
 	const lineBreakLength = lineBreak.length;
 
 	const endBuf = Buffer.concat([Buffer.from("--"), lineBreak], 2+lineBreakLength);
