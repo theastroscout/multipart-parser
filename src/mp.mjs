@@ -114,13 +114,15 @@ const multipart = buf => {
 				
 				if(line.indexOf(contentDisposition) > -1){
 
+					line = line.toString().trim();
+
 					/*
 
 					Content Disposition
 
 					*/
 
-					name = line.toString().match(/name\=\"([^"]+)\"/)
+					name = line.match(/name\=\"([^"]+)\"/)
 					name = name ? name[1] : "";
 
 					isArray = /\[\]/.test(name);
@@ -130,7 +132,7 @@ const multipart = buf => {
 						data[name] = [];
 					}
 
-					let fileName = line.toString().match(/filename\=\"([^"]+)\"/);
+					let fileName = line.match(/filename\=\"([^"]+)\"/);
 					if(fileName){
 						file.fileName = fileName[1];
 					}
@@ -143,7 +145,7 @@ const multipart = buf => {
 
 					*/
 
-					file.mime = line.toString().replace("Content-Type: ","");
+					file.mime = line.toString().trim().replace("Content-Type: ","");
 
 				}
 

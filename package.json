@@ -1,5 +1,5 @@
 {
-  "name": "@hqdaemon/multipart-parser",
+  "name": "@surfy/multipart-parser",
   "version": "1.0.0",
   "description": "Node.js Multipart Data Processing",
   "main": "src/mp.mjs",
@@ -17,10 +17,7 @@
     "multipart",
     "parser"
   ],
-  "author": {
-    "name": "Alexander Yermolenko",
-    "url": "https://surfy.one"
-  },
+  "author": "Alexander Yermolenko (https://surfy.one)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hqdaemon/multipart-parser/issues"
