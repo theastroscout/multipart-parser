@@ -1,3 +1,119 @@
+# Multipart Data Processing
+
+## Installation
+
+```
+npm install @surfy/multipart-parser
+```
+
+## Usage
+
+```js
+
+import mp from "@surfy/multipart-parser";
+
+const incomeData = `------cb6762ec1a35a74a
+Content-Disposition: form-data; name="jsonFile"
+Content-Type: application/json
+
+{"key": "value"}
+------cb6762ec1a35a74a
+Content-Disposition: form-data; name="variable"
+
+value
+------cb6762ec1a35a74a
+Content-Disposition: form-data; name="image"; filename="filename.jpg"
+Content-Type: image/jpeg
+
+Exif....
+------cb6762ec1a35a74a
+Content-Disposition: form-data; name="images[]"; filename="filename1.jpg"
+Content-Type: image/jpeg
+
+Exif....
+------cb6762ec1a35a74a
+Content-Disposition: form-data; name="images[]"; filename="filename2.jpg"
+Content-Type: image/jpeg
+
+Exif....
+------cb6762ec1a35a74a
+Content-Disposition: form-data; name="binFile"; filename="bin.dat"
+Content-Type: application/octet-stream
+
+Binary data
+------cb6762ec1a35a74a
+Content-Disposition: form-data; name="textFile"; filename="text.txt"
+Content-Type: text/plain
+
+Plain Text
+------cb6762ec1a35a74a--
+`;
+
+const multipartBuffer = Buffer.from(incomeData);
+let data = mp(multipartBuffer);
+
+```
+
+## Output
+```
+{
+	jsonFile: {
+		mime: 'application/json',
+		type: 'json',
+		json: { key: 'value' },
+		buffer: <Buffer 7b 22 6b 65 79 22 3a 20 22 76 61 6c 75 65 22 7d>,
+		size: 0.02
+	},
+	variable: {
+		type: 'string',
+		value: 'value',
+		buffer: <Buffer 76 61 6c 75 65>,
+		size: 0
+	},
+	image: {
+		fileName: 'filename.jpg',
+		mime: 'image/jpeg',
+		type: 'file',
+		buffer: <Buffer 03 53 45 78 69 66 00 2e 2e 2e 2e>,
+		size: 0.01
+	},
+	images: [
+		{
+			fileName: 'filename1.jpg',
+			mime: 'image/jpeg',
+			type: 'file',
+			buffer: <Buffer 03 53 45 78 69 66 00 2e 2e 2e 2e>,
+			size: 0.01
+		},
+		{
+			fileName: 'filename2.jpg',
+			mime: 'image/jpeg',
+			type: 'file',
+			buffer: <Buffer 03 53 45 78 69 66 00 2e 2e 2e 2e>,
+			size: 0.01
+		}
+	],
+	binFile: {
+		fileName: 'bin.dat',
+		mime: 'application/octet-stream',
+		type: 'file',
+		buffer: <Buffer 42 69 6e 61 72 79 20 64 61 74 61>,
+		size: 0.01
+	},
+	textFile: {
+		fileName: 'text.txt',
+		mime: 'text/plain',
+		type: 'plain',
+		value: 'Plain Text',
+		buffer: <Buffer 50 6c 61 69 6e 20 54 65 78 74>,
+		size: 0.01
+	}
+}
+```
+
+<br />
+<br />
+
 ## MIT License
 
 Copyright (c) Alexander Yermolenko • [surfy.one](https://surfy.one)
